@@ -35,43 +35,6 @@ CREATE TABLE `movies` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `movies_and_occupations`
---
-
-DROP TABLE IF EXISTS `movies_and_occupations`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `movies_and_occupations` (
-  `idMovie` bigint(20) unsigned NOT NULL,
-  `idOccupation` bigint(20) unsigned NOT NULL,
-  `idPerson` bigint(20) unsigned NOT NULL,
-  PRIMARY KEY (`idMovie`,`idOccupation`,`idPerson`),
-  KEY `FK_movies_and_occupations_occupations_idx` (`idOccupation`),
-  KEY `FK_movies_and_occupations_persons_idx` (`idPerson`),
-  CONSTRAINT `FK_movies_and_occupations_movies` FOREIGN KEY (`idMovie`) REFERENCES `movies` (`idMovie`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK_movies_and_occupations_occupations` FOREIGN KEY (`idOccupation`) REFERENCES `occupations` (`idOccupation`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK_movies_and_occupations_persons` FOREIGN KEY (`idPerson`) REFERENCES `persons` (`idPerson`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `movies_and_tags`
---
-
-DROP TABLE IF EXISTS `movies_and_tags`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `movies_and_tags` (
-  `idMovie` bigint(20) unsigned NOT NULL,
-  `idTag` bigint(20) unsigned NOT NULL,
-  PRIMARY KEY (`idMovie`,`idTag`),
-  KEY `FK_movies_and_tags_tags_idx` (`idTag`),
-  CONSTRAINT `FK_movies_and_tags_movies` FOREIGN KEY (`idMovie`) REFERENCES `movies` (`idMovie`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK_movies_and_tags_tags` FOREIGN KEY (`idTag`) REFERENCES `tags` (`idtag`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='setting tags for movies';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Table structure for table `occupations`
 --
 
@@ -135,6 +98,43 @@ CREATE TABLE `users` (
   UNIQUE KEY `login_UNIQUE` (`login`),
   UNIQUE KEY `email_UNIQUE` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='table for users';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `movies_and_occupations`
+--
+
+DROP TABLE IF EXISTS `movies_and_occupations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `movies_and_occupations` (
+  `idMovie` bigint(20) unsigned NOT NULL,
+  `idOccupation` bigint(20) unsigned NOT NULL,
+  `idPerson` bigint(20) unsigned NOT NULL,
+  PRIMARY KEY (`idMovie`,`idOccupation`,`idPerson`),
+  KEY `FK_movies_and_occupations_occupations_idx` (`idOccupation`),
+  KEY `FK_movies_and_occupations_persons_idx` (`idPerson`),
+  CONSTRAINT `FK_movies_and_occupations_movies` FOREIGN KEY (`idMovie`) REFERENCES `movies` (`idMovie`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_movies_and_occupations_occupations` FOREIGN KEY (`idOccupation`) REFERENCES `occupations` (`idOccupation`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_movies_and_occupations_persons` FOREIGN KEY (`idPerson`) REFERENCES `persons` (`idPerson`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `movies_and_tags`
+--
+
+DROP TABLE IF EXISTS `movies_and_tags`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `movies_and_tags` (
+  `idMovie` bigint(20) unsigned NOT NULL,
+  `idTag` bigint(20) unsigned NOT NULL,
+  PRIMARY KEY (`idMovie`,`idTag`),
+  KEY `FK_movies_and_tags_tags_idx` (`idTag`),
+  CONSTRAINT `FK_movies_and_tags_movies` FOREIGN KEY (`idMovie`) REFERENCES `movies` (`idMovie`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_movies_and_tags_tags` FOREIGN KEY (`idTag`) REFERENCES `tags` (`idtag`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='setting tags for movies';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
